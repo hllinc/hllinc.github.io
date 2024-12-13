@@ -1,3 +1,6 @@
+#page-header {
+    background: black;
+}
 /* 首页文章 */
 #recent-posts .recent-post-item .post_cover img.post-bg {
     border-radius: 30px;

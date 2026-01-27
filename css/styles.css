@@ -34,15 +34,182 @@ body {
 }
 
 /* ============================================
-   ✨ 头部区域 - 赛博朋克风格
+   🌟 动态星空背景
+   ============================================ */
+#starfield {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: -1;
+  overflow: hidden;
+}
+
+/* 星星基础样式 */
+.star {
+  position: absolute;
+  background: #fff;
+  border-radius: 50%;
+  animation: twinkle var(--twinkle-duration, 3s) ease-in-out infinite;
+  box-shadow: 0 0 var(--glow-size, 3px) var(--star-color, #fff);
+}
+
+/* 小星星 */
+.star.small {
+  width: 1px;
+  height: 1px;
+  --glow-size: 2px;
+}
+
+/* 中等星星 */
+.star.medium {
+  width: 2px;
+  height: 2px;
+  --glow-size: 4px;
+}
+
+/* 大星星 */
+.star.large {
+  width: 3px;
+  height: 3px;
+  --glow-size: 6px;
+}
+
+/* 星星闪烁动画 */
+@keyframes twinkle {
+  0%, 100% {
+    opacity: var(--base-opacity, 0.3);
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.2);
+  }
+}
+
+/* 流星样式 */
+.shooting-star {
+  position: absolute;
+  width: 100px;
+  height: 2px;
+  background: linear-gradient(90deg, #fff, transparent);
+  border-radius: 50%;
+  animation: shoot linear infinite;
+  opacity: 0;
+  box-shadow: 
+    0 0 10px 2px rgba(255, 255, 255, 0.5),
+    0 0 20px 4px rgba(0, 245, 255, 0.3);
+}
+
+.shooting-star::before {
+  content: '';
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  background: #fff;
+  border-radius: 50%;
+  top: -2px;
+  left: 0;
+  box-shadow: 0 0 10px 3px rgba(255, 255, 255, 0.8);
+}
+
+@keyframes shoot {
+  0% {
+    transform: translateX(0) translateY(0) rotate(-45deg);
+    opacity: 0;
+  }
+  5% {
+    opacity: 1;
+  }
+  70% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(500px) translateY(500px) rotate(-45deg);
+    opacity: 0;
+  }
+}
+
+/* 星云/银河效果 */
+.nebula {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.15;
+  animation: nebulaFloat 30s ease-in-out infinite;
+}
+
+.nebula-1 {
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(0, 245, 255, 0.4) 0%, transparent 70%);
+  top: 10%;
+  left: 20%;
+  animation-delay: 0s;
+}
+
+.nebula-2 {
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, rgba(255, 0, 255, 0.4) 0%, transparent 70%);
+  top: 50%;
+  right: 15%;
+  animation-delay: -10s;
+}
+
+.nebula-3 {
+  width: 350px;
+  height: 350px;
+  background: radial-gradient(circle, rgba(0, 255, 136, 0.3) 0%, transparent 70%);
+  bottom: 20%;
+  left: 10%;
+  animation-delay: -20s;
+}
+
+@keyframes nebulaFloat {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+  }
+  25% {
+    transform: translate(30px, -20px) scale(1.1);
+  }
+  50% {
+    transform: translate(-20px, 30px) scale(0.9);
+  }
+  75% {
+    transform: translate(-30px, -10px) scale(1.05);
+  }
+}
+
+/* 亮色模式下隐藏星空 */
+[data-theme="light"] #starfield {
+  opacity: 0.3;
+}
+
+[data-theme="light"] .nebula {
+  opacity: 0.08;
+}
+
+/* ============================================
+   ✨ 头部区域 - 赛博朋克风格 + 透明星空
    ============================================ */
 #page-header {
-  background: linear-gradient(180deg, 
-    rgba(0, 0, 0, 0.9) 0%, 
-    rgba(15, 12, 41, 0.8) 50%, 
-    transparent 100%);
+  background: transparent !important;
   position: relative;
   overflow: hidden;
+}
+
+/* 隐藏默认背景图片，让星空透出 */
+#page-header #page-header-bg {
+  background: transparent !important;
+  background-image: none !important;
+}
+
+#page-header.not-top-img {
+  height: 100vh !important;
+  background: transparent !important;
 }
 
 #page-header::before {
@@ -57,6 +224,13 @@ body {
     radial-gradient(ellipse at 80% 50%, rgba(255, 0, 255, 0.15) 0%, transparent 50%);
   pointer-events: none;
   z-index: 0;
+}
+
+/* 首页header保持全屏高度 */
+#page-header.full_page {
+  background: linear-gradient(180deg, 
+    rgba(0, 0, 0, 0.15) 0%, 
+    transparent 100%) !important;
 }
 
 /* --- 网站标题 - 霓虹效果 --- */
@@ -179,7 +353,7 @@ body {
 }
 
 .avatar-img:hover {
-  transform: rotate(360deg) scale(1.1);
+  transform: scale(1.05);
   box-shadow: 
     0 0 20px rgba(0, 245, 255, 0.6),
     0 0 40px rgba(255, 0, 255, 0.4),

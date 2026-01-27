@@ -607,14 +607,22 @@ a, button, .clickable {
   transition: all 0.3s ease;
   border-left: 2px solid transparent;
   padding-left: 10px;
+  color: rgba(255, 255, 255, 0.7) !important;
+}
+
+#card-toc .toc-content .toc-link:hover {
+  color: #00f5ff !important;
 }
 
 #card-toc .toc-content .toc-link.active {
-  color: #00f5ff !important;
+  color: #0a0a0a !important;
   border-left-color: #00f5ff;
   background: linear-gradient(90deg, 
-    rgba(0, 245, 255, 0.1), 
-    transparent);
+    rgba(0, 245, 255, 0.9), 
+    rgba(0, 245, 255, 0.3));
+  text-shadow: none;
+  font-weight: 600;
+  border-radius: 0 4px 4px 0;
 }
 
 /* ============================================
@@ -902,12 +910,22 @@ a, button, .clickable {
 }
 
 /* 亮色模式 - 目录 */
-[data-theme="light"] #card-toc .toc-content .toc-link.active {
+[data-theme="light"] #card-toc .toc-content .toc-link {
+  color: rgba(30, 30, 60, 0.7) !important;
+}
+
+[data-theme="light"] #card-toc .toc-content .toc-link:hover {
   color: #6366f1 !important;
+}
+
+[data-theme="light"] #card-toc .toc-content .toc-link.active {
+  color: #4f46e5 !important;
   border-left-color: #6366f1;
   background: linear-gradient(90deg, 
-    rgba(99, 102, 241, 0.1), 
+    rgba(99, 102, 241, 0.15), 
     transparent);
+  text-shadow: none;
+  font-weight: 600;
 }
 
 /* 亮色模式 - 搜索框 */
